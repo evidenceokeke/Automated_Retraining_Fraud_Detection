@@ -13,12 +13,6 @@ jobs:
   retrain:
     runs-on: ubuntu-latest # Use Ubuntu as the environment
 
-    # Add environment variables
-    env:
-      AWS_ACCESS_KEY_iD: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS-KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_DEFAULT_REGION: 'us-east-2'
-
     steps:
       # Step 1: Checkout the repository
       - name: Checkout repository
@@ -36,6 +30,14 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
+      # Step 4: Set up AWS Credential
+      - name: Set AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
       # Debug - Check if AWS credentials are set
       - name: Check AWS Credentials
         run: |
@@ -43,7 +45,7 @@ jobs:
           echo "AWS Secret Access Key: $AWS_SECRET_ACCESS_KEY"
           echo "AWS Default Region: $AWS_DEFAULT_REGION"
 
-      # Step 4: Run the training script
+      # Step 5: Run the training script
       - name: Run retraining.py
         run: |
           python retraining.py 
