@@ -13,15 +13,15 @@ np.random.seed(42)
 s3 = boto3.client('s3')
 
 # Download the "new data" from S3
-s3.download_file('cc-fraud-detection-model-dataset', 's3://cc-fraud-detection-model-dataset/dataset/X_new.csv', 'dataset/X_new.csv')
-s3.download_file('cc-fraud-detection-model-dataset', 's3://cc-fraud-detection-model-dataset/dataset/y_new.csv', 'dataset/y_new.csv')
+s3.download_file('cc-fraud-detection-model-dataset', 'dataset/X_new.csv', 'dataset/X_new.csv')
+s3.download_file('cc-fraud-detection-model-dataset', 'dataset/y_new.csv', 'dataset/y_new.csv')
 
 # Load the dataset
 X_new = pd.read_csv('dataset/X_new.csv')
 y_new = pd.read_csv('dataset/y_new.csv')
 
 # Download the original model from S3
-s3.download_file('cc-fraud-detection-model-dataset', 's3://cc-fraud-detection-model-dataset/fraud_pipeline.pkl', 'fraud_pipeline.pkl')
+s3.download_file('cc-fraud-detection-model-dataset', 'fraud_pipeline.pkl', 'fraud_pipeline.pkl')
 
 # Load the model
 model = joblib.load('fraud_pipeline.pkl')
