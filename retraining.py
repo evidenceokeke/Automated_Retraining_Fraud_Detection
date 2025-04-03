@@ -30,7 +30,7 @@ s3.download_file('cc-fraud-detection-model-dataset', 's3://cc-fraud-detection-mo
 # Load the model
 model = joblib.load('fraud_pipeline.pkl')
 
-# Retrain model on new data
+# Retrain model on new data (fine-tune)
 model.fit(X_new, y_new)
 
 # Save the updated model

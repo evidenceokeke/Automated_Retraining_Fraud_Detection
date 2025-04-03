@@ -31,6 +31,6 @@ jobs:
           pip install -r requirements.txt
 
       # Step 4: Run the training script
-      - name: Run model_training.py
+      - name: Run retraining.py
         run: |
-          python model_training.py 
+          python retraining.py 
