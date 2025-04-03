@@ -31,15 +31,15 @@ y = cc_fraud_df['Class']
 # Split the dataset: One for training, One  to simulate retraining
 X_train, X_new, y_train, y_new = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
 
-# To avoid continually save the dataset everytime it is run, run this only once
-"""# Save the new data (X_new, y_new) to S3 for future retraining simulation
+
+# Save the new data (X_new, y_new) to S3 for future retraining simulation
 X_new.to_csv('dataset/X_new.csv', index=False)
 y_new.to_csv('dataset/y_new.csv', index=False)
 
 # Upload X_new and y_new to S3
 s3.upload_file('dataset/X_new.csv', 'cc-fraud-detection-model-dataset', 's3://cc-fraud-detection-model-dataset/dataset/X_new.csv')
 s3.upload_file('dataset/y_new.csv', 'cc-fraud-detection-model-dataset', 's3://cc-fraud-detection-model-dataset/dataset/y_new.csv')
-"""
+
 # Build and train the model, added scaling to the pipeline for preprocessing features
 model = Pipeline([
     ('scaler', StandardScaler()),
