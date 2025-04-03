@@ -13,6 +13,12 @@ jobs:
   retrain:
     runs-on: ubuntu-latest # Use Ubuntu as the environment
 
+    # Add environment variables
+    env:
+      AWS_ACCESS_KEY_iD: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS-KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: 'us-east-2'
+
     steps:
       # Step 1: Checkout the repository
       - name: Checkout repository
