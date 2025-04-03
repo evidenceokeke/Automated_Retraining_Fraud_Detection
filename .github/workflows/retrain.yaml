@@ -36,6 +36,13 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
+      # Debug - Check if AWS credentials are set
+      - name: Check AWS Credentials
+        run: |
+          echo "AWS Access Key ID: $AWS_ACCESS_KEY_ID"
+          echo "AWS Secret Access Key: $AWS_SECRET_ACCESS_KEY"
+          echo "AWS Default Region: $AWS_DEFAULT_REGION"
+
       # Step 4: Run the training script
       - name: Run retraining.py
         run: |
