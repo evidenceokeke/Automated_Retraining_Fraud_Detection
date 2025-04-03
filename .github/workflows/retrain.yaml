@@ -1,0 +1,36 @@
+name: Model Retraining
+
+on:
+  # Trigger the workflow to run every week
+  schedule:
+    - cron: '0 0 * * 0' # Every sunday at midnight (UTC)
+  # Trigger the workflow when a new dataset or change is pushed to the repository
+  push:
+    branches:
+      - main # Run on any push to the main branch
+
+jobs:
+  retrain:
+    runs-on: ubuntu-latest # Use Ubuntu as the environment
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11' 
+
+      # Step 3: Install dependencies from requirements.txt
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Step 4: Run the training script
+      - name: Run model_training.py
+        run: |
+          python model_training.py 
