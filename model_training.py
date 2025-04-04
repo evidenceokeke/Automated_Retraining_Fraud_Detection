@@ -18,7 +18,7 @@ np.random.seed(42)
 s3 = boto3.client('s3')
 
 # Download the dataset from S3
-s3.download_file('cc-fraud-detection-model-dataset','s3://cc-fraud-detection-model-dataset/dataset/creditcard.csv', 'dataset/creditcard.csv')
+s3.download_file('cc-fraud-detection-model-dataset','dataset/creditcard.csv', 'dataset/creditcard.csv')
 
 # Load the dataset
 cc_fraud_df = pd.read_csv("dataset/creditcard.csv")
@@ -37,8 +37,8 @@ X_new.to_csv('dataset/X_new.csv', index=False)
 y_new.to_csv('dataset/y_new.csv', index=False)
 
 # Upload X_new and y_new to S3
-s3.upload_file('dataset/X_new.csv', 'cc-fraud-detection-model-dataset', 's3://cc-fraud-detection-model-dataset/dataset/X_new.csv')
-s3.upload_file('dataset/y_new.csv', 'cc-fraud-detection-model-dataset', 's3://cc-fraud-detection-model-dataset/dataset/y_new.csv')
+s3.upload_file('dataset/X_new.csv', 'cc-fraud-detection-model-dataset', 'dataset/X_new.csv')
+s3.upload_file('dataset/y_new.csv', 'cc-fraud-detection-model-dataset', 'dataset/y_new.csv')
 
 # Build and train the model, added scaling to the pipeline for preprocessing features
 model = Pipeline([
@@ -52,4 +52,4 @@ model.fit(X_train, y_train)
 joblib.dump(model, "fraud_pipeline.pkl")
 
 # Upload the trained model to S3 after training
-s3.upload_file('fraud_pipeline.pkl', 'cc-fraud-detection-model-dataset', 's3://cc-fraud-detection-model-dataset/fraud_pipeline.pkl')
+s3.upload_file('fraud_pipeline.pkl', 'cc-fraud-detection-model-dataset', 'fraud_pipeline.pkl')

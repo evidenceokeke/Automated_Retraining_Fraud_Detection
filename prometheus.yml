@@ -1,0 +1,7 @@
+global:
+  scrape_interval: 10s
+
+scrape_configs:
+  - job_name: 'flask_app'
+    static_configs:
+      - targets: ['host.docker.internal:5000'] # use 'localhost:5000' if you are running locally
