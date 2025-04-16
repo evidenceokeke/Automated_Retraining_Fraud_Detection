@@ -20,11 +20,17 @@ An end-to-end MLOps system that detects fraudulent transactions, retrains automa
 * Postman for testing
 
 **Project Structure**
+
 ├── app.py                      # Flask API for prediction
+
 ├── model_training.py           # Model training script
+
 ├── retraining.py               # GitHub Actions-triggered retraining logic
+
 ├── .github/workflows/          # CI/CD workflows
+
 ├── prometheus.yml              # Monitoring config
+
 ├── README.md
 
 
